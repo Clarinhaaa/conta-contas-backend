@@ -40,19 +40,26 @@ public class ContaModel {
     @Column(name = "statusConta", nullable = true)
     private boolean statusConta;
 
-    //* Categoria */
+    // * Usuario */
+    @ManyToOne
+    @JoinColumn(name = "Usuario_idUsuario", nullable = false)
+    private UsuarioModel usuarioConta;
+
+    // * Categoria */
     @ManyToOne
     @JoinColumn(name = "Categoria_idCategoria", nullable = false)
     private CategoriaModel categoriaConta;
 
-    //* Parcela */
+    // * Parcela */
     @OneToMany(mappedBy = "contaParcela", cascade = CascadeType.ALL)
     private List<ParcelaModel> parcelas;
 
-    public ContaModel() {}
+    public ContaModel() {
+    }
 
     public ContaModel(int idConta, String descricaoConta, float valorConta, Date dataVencimentoConta,
-            Date dataPagamentoConta, String tipoConta, boolean statusConta, CategoriaModel categoriaConta) {
+            Date dataPagamentoConta, String tipoConta, boolean statusConta, UsuarioModel usuarioConta,
+            CategoriaModel categoriaConta) {
         this.idConta = idConta;
         this.descricaoConta = descricaoConta;
         this.valorConta = valorConta;
@@ -60,6 +67,7 @@ public class ContaModel {
         this.dataPagamentoConta = dataPagamentoConta;
         this.tipoConta = tipoConta;
         this.statusConta = statusConta;
+        this.usuarioConta = usuarioConta;
         this.categoriaConta = categoriaConta;
     }
 
@@ -119,6 +127,14 @@ public class ContaModel {
         this.statusConta = statusConta;
     }
 
+    public UsuarioModel getUsuarioConta() {
+        return usuarioConta;
+    }
+
+    public void setUsuarioConta(UsuarioModel usuarioConta) {
+        this.usuarioConta = usuarioConta;
+    }
+
     public CategoriaModel getCategoriaConta() {
         return categoriaConta;
     }
@@ -131,7 +147,8 @@ public class ContaModel {
     public String toString() {
         return "ContaModel [idConta=" + idConta + ", descricaoConta=" + descricaoConta + ", valorConta=" + valorConta
                 + ", dataVencimentoConta=" + dataVencimentoConta + ", dataPagamentoConta=" + dataPagamentoConta
-                + ", tipoConta=" + tipoConta + ", statusConta=" + statusConta + ", categoriaConta=" + categoriaConta.getDescricaoCategoria()
+                + ", tipoConta=" + tipoConta + ", statusConta=" + statusConta + ", usuarioConta="
+                + usuarioConta.getNomeUsuario() + ", categoriaConta=" + categoriaConta.getDescricaoCategoria()
                 + "]";
     }
 }

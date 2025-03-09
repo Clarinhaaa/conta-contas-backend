@@ -1,4 +1,4 @@
-package br.com.projetofinal.api.dao;
+package br.com.projetofinal.api.dao.util;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

@@ -1,5 +1,8 @@
 package br.com.projetofinal.api.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -42,6 +46,10 @@ public class UsuarioModel {
     @OneToOne
     @JoinColumn(name = "Telefone_idTelefone", nullable = false)
     private TelefoneModel telefoneUsuario;
+
+    //* Conta */
+    @OneToMany(mappedBy = "usuarioConta", cascade = CascadeType.ALL)
+    private List<ContaModel> contas;
 
     public UsuarioModel() {}
 

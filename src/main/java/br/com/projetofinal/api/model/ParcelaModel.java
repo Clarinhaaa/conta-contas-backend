@@ -31,6 +31,7 @@ public class ParcelaModel {
     @Column(name = "statusParcela", nullable = true)
     private String statusParcela;
 
+    //* Conta */
     @ManyToOne
     @JoinColumn(name = "Conta_idConta", nullable = false)
     private ContaModel contaParcela;
