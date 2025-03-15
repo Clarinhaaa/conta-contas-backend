@@ -7,6 +7,7 @@ import br.com.projetofinal.api.dao.util.InterfaceDao;
 import br.com.projetofinal.api.model.ParcelaModel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 
 public class ParcelaDao implements InterfaceDao<ParcelaModel> {
     EntityManager em = GetEntityManager.getConnectionJPA();
@@ -38,9 +39,13 @@ public class ParcelaDao implements InterfaceDao<ParcelaModel> {
         em.getTransaction().commit();
     }
 
+    @Transactional
     public void delete(ParcelaModel par) {
-        em.getTransaction().begin();
-        em.remove(par);
-        em.getTransaction().commit();
+        if(em.contains(par)) {
+            em.remove(par);
+        } else {
+            ParcelaModel generatedPar = em.merge(par);
+            em.remove(generatedPar);
+        }
     }
 }

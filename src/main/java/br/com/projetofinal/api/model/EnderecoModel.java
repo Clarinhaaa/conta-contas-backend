@@ -11,15 +11,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-@Entity
+@Entity(name = "Endereco")
 @Table(name = "Endereco")
 public class EnderecoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idEndereco")
+    @Column(name = "idendereco")
     private int idEndereco;
 
-    @Column(name = "numeroCasa", nullable = true)
+    @Column(name = "numerocasa", nullable = true)
     private int numeroCasa;
 
     @Column(name = "rua", nullable = true)

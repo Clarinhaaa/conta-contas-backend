@@ -26,7 +26,7 @@ public class CategoriaModel {
     private String tipoCategoria;
 
     //* Conta */
-    @OneToMany(mappedBy = "cateogriaConta", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "categoriaConta", cascade = CascadeType.ALL)
     private List<ContaModel> contas;
 
     public CategoriaModel() {}

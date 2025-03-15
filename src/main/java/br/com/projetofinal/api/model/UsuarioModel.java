@@ -19,22 +19,22 @@ import jakarta.persistence.Table;
 public class UsuarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUsuario")
+    @Column(name = "idusuario")
     private int idUsuario;
 
-    @Column(name = "nomeUsuario", nullable = true)
+    @Column(name = "nomeusuario", nullable = true)
     private String nomeUsuario;
 
-    @Column(name = "cpfUsuario", nullable = true)
+    @Column(name = "cpfusuario", nullable = true)
     private String cpfUsuario;
 
-    @Column(name = "emailUsuario", nullable = true)
+    @Column(name = "emailusuario", nullable = true)
     private String emailUsuario;
 
-    @Column(name = "loginUsuario", nullable = true)
+    @Column(name = "loginusuario", nullable = true)
     private String loginUsuario;
 
-    @Column(name = "senhaUsuario", nullable = true)
+    @Column(name = "senhausuario", nullable = true)
     private String senhaUsuario;
 
     //* Endereço */

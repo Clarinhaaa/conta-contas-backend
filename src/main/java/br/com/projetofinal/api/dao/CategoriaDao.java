@@ -6,6 +6,7 @@ import br.com.projetofinal.api.dao.util.GetEntityManager;
 import br.com.projetofinal.api.dao.util.InterfaceDao;
 import br.com.projetofinal.api.model.CategoriaModel;
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 
 public class CategoriaDao implements InterfaceDao<CategoriaModel> {
     EntityManager em = GetEntityManager.getConnectionJPA();
@@ -30,9 +31,13 @@ public class CategoriaDao implements InterfaceDao<CategoriaModel> {
         em.getTransaction().commit();
     }
 
+    @Transactional
     public void delete(CategoriaModel cat) {
-        em.getTransaction().begin();
-        em.remove(cat);
-        em.getTransaction().commit();
+        if(em.contains(cat)) {
+            em.remove(cat);
+        } else {
+            CategoriaModel generatedCat = em.merge(cat);
+            em.remove(generatedCat);
+        }
     }
 }

@@ -6,6 +6,7 @@ import br.com.projetofinal.api.dao.util.GetEntityManager;
 import br.com.projetofinal.api.dao.util.InterfaceDao;
 import br.com.projetofinal.api.model.TelefoneModel;
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 
 public class TelefoneDao implements InterfaceDao<TelefoneModel> {
     EntityManager em = GetEntityManager.getConnectionJPA();
@@ -30,9 +31,13 @@ public class TelefoneDao implements InterfaceDao<TelefoneModel> {
         em.getTransaction().commit();
     }
 
+    @Transactional
     public void delete(TelefoneModel tel) {
-        em.getTransaction().begin();
-        em.remove(tel);
-        em.getTransaction().commit();
+        if(em.contains(tel)) {
+            em.remove(tel);
+        } else {
+            TelefoneModel generatedTel = em.merge(tel);
+            em.remove(generatedTel);
+        }
     }
 }

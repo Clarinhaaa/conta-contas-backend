@@ -7,6 +7,7 @@ import br.com.projetofinal.api.dao.util.InterfaceDao;
 import br.com.projetofinal.api.model.ContaModel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 
 public class ContaDao implements InterfaceDao<ContaModel> {
     EntityManager em = GetEntityManager.getConnectionJPA();
@@ -38,9 +39,13 @@ public class ContaDao implements InterfaceDao<ContaModel> {
         em.getTransaction().commit();
     }
 
+    @Transactional
     public void delete(ContaModel con) {
-        em.getTransaction().begin();
-        em.remove(con);
-        em.getTransaction().commit();
+        if(em.contains(con)) {
+            em.remove(con);
+        } else {
+            ContaModel generatedCon = em.merge(con);
+            em.remove(generatedCon);
+        }
     }
 }

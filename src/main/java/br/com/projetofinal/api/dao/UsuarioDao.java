@@ -2,18 +2,22 @@ package br.com.projetofinal.api.dao;
 
 import java.util.List;
 
-import br.com.projetofinal.api.dao.util.GetEntityManager;
+import org.springframework.stereotype.Repository;
+
 import br.com.projetofinal.api.dao.util.InterfaceDao;
 import br.com.projetofinal.api.model.UsuarioModel;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
+@Repository
 public class UsuarioDao implements InterfaceDao<UsuarioModel> {
-    EntityManager em = GetEntityManager.getConnectionJPA();
+    @PersistenceContext
+    private EntityManager em;
     
+    @Transactional
     public void insert(UsuarioModel usu) {
-        em.getTransaction().begin();
         em.persist(usu);
-        em.getTransaction().commit();
     }
 
     public List<UsuarioModel> getAll() {
@@ -24,15 +28,18 @@ public class UsuarioDao implements InterfaceDao<UsuarioModel> {
         return em.find(UsuarioModel.class, id);
     }
 
+    @Transactional
     public void update(UsuarioModel usu) {
-        em.getTransaction().begin();
         em.merge(usu);
-        em.getTransaction().commit();
     }
 
+    @Transactional
     public void delete(UsuarioModel usu) {
-        em.getTransaction().begin();
-        em.remove(usu);
-        em.getTransaction().commit();
+        if(em.contains(usu)) {
+            em.remove(usu);
+        }else {
+            UsuarioModel novoUsu = em.merge(usu);
+            em.remove(novoUsu);
+        }
     }
 }
