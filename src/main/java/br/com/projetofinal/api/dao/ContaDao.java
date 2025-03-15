@@ -2,21 +2,19 @@ package br.com.projetofinal.api.dao;
 
 import java.util.List;
 
-import br.com.projetofinal.api.dao.util.GetEntityManager;
+import org.springframework.stereotype.Repository;
+
 import br.com.projetofinal.api.dao.util.InterfaceDao;
 import br.com.projetofinal.api.model.ContaModel;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
+@Repository
 public class ContaDao implements InterfaceDao<ContaModel> {
-    EntityManager em = GetEntityManager.getConnectionJPA();
-
-    public void insert(ContaModel con) {
-        em.getTransaction().begin();
-        em.persist(con);
-        em.getTransaction().commit();
-    }
+    @PersistenceContext
+    private EntityManager em;
 
     public List<ContaModel> getAll() {
         return em.createQuery("SELECT c FROM Conta c", ContaModel.class).getResultList();
@@ -33,10 +31,14 @@ public class ContaDao implements InterfaceDao<ContaModel> {
         return query.getResultList();
     }
 
+    @Transactional
+    public void insert(ContaModel con) {
+        em.persist(con);
+    }
+
+    @Transactional
     public void update(ContaModel con) {
-        em.getTransaction().begin();
         em.merge(con);
-        em.getTransaction().commit();
     }
 
     @Transactional

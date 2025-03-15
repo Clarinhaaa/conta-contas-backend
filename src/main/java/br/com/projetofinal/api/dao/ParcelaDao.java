@@ -2,21 +2,19 @@ package br.com.projetofinal.api.dao;
 
 import java.util.List;
 
-import br.com.projetofinal.api.dao.util.GetEntityManager;
+import org.springframework.stereotype.Repository;
+
 import br.com.projetofinal.api.dao.util.InterfaceDao;
 import br.com.projetofinal.api.model.ParcelaModel;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
+@Repository
 public class ParcelaDao implements InterfaceDao<ParcelaModel> {
-    EntityManager em = GetEntityManager.getConnectionJPA();
-
-    public void insert(ParcelaModel par) {
-        em.getTransaction().begin();
-        em.persist(par);
-        em.getTransaction().commit();
-    }
+    @PersistenceContext
+    private EntityManager em;
 
     public List<ParcelaModel> getAll() {
         return em.createQuery("SELECT p FROM Parcela p", ParcelaModel.class).getResultList();
@@ -33,10 +31,14 @@ public class ParcelaDao implements InterfaceDao<ParcelaModel> {
         return query.getResultList();
     }
 
+    @Transactional
+    public void insert(ParcelaModel par) {
+        em.persist(par);
+    }
+
+    @Transactional
     public void update(ParcelaModel par) {
-        em.getTransaction().begin();
         em.merge(par);
-        em.getTransaction().commit();
     }
 
     @Transactional

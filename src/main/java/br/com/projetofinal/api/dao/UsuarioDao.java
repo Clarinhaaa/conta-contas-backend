@@ -14,11 +14,6 @@ import jakarta.transaction.Transactional;
 public class UsuarioDao implements InterfaceDao<UsuarioModel> {
     @PersistenceContext
     private EntityManager em;
-    
-    @Transactional
-    public void insert(UsuarioModel usu) {
-        em.persist(usu);
-    }
 
     public List<UsuarioModel> getAll() {
         return em.createQuery("SELECT u FROM Usuario u", UsuarioModel.class).getResultList();
@@ -26,6 +21,11 @@ public class UsuarioDao implements InterfaceDao<UsuarioModel> {
 
     public UsuarioModel getById(int id) {
         return em.find(UsuarioModel.class, id);
+    }
+
+    @Transactional
+    public void insert(UsuarioModel usu) {
+        em.persist(usu);
     }
 
     @Transactional

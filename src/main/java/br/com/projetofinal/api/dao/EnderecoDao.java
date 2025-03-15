@@ -15,17 +15,17 @@ public class EnderecoDao implements InterfaceDao<EnderecoModel> {
     @PersistenceContext
     private EntityManager em;
 
-    @Transactional
-    public void insert(EnderecoModel end) {
-        em.persist(end);
-    }
-
     public List<EnderecoModel> getAll() {
         return em.createQuery("SELECT e FROM Endereco e", EnderecoModel.class).getResultList();
     }
 
     public EnderecoModel getById(int id) {
         return em.find(EnderecoModel.class, id);
+    }
+
+    @Transactional
+    public void insert(EnderecoModel end) {
+        em.persist(end);
     }
 
     @Transactional
