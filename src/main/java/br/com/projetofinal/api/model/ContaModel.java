@@ -14,30 +14,30 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-@Entity
+@Entity(name = "Conta")
 @Table(name = "Conta")
 public class ContaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idConta")
+    @Column(name = "idconta")
     private int idConta;
 
-    @Column(name = "descricaoConta", nullable = true)
+    @Column(name = "descricaoconta", nullable = true)
     private String descricaoConta;
 
-    @Column(name = "valorConta", nullable = true)
+    @Column(name = "valorconta", nullable = true)
     private float valorConta;
 
-    @Column(name = "dataVencimentoConta", nullable = true)
+    @Column(name = "datavencimentoconta", nullable = true)
     private Date dataVencimentoConta;
 
-    @Column(name = "dataPagamentoConta", nullable = true)
+    @Column(name = "datapagamentoconta", nullable = true)
     private Date dataPagamentoConta;
 
-    @Column(name = "tipoConta", nullable = true)
+    @Column(name = "tipoconta", nullable = true)
     private String tipoConta;
 
-    @Column(name = "statusConta", nullable = true)
+    @Column(name = "statusconta", nullable = true)
     private boolean statusConta;
 
     // * Usuario */

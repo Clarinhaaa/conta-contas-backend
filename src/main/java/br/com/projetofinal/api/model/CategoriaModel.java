@@ -11,18 +11,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-@Entity
+@Entity(name = "Categoria")
 @Table(name = "Categoria")
 public class CategoriaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idCategoria")
+    @Column(name = "idcategoria")
     private int idCategoria;
 
-    @Column(name = "descricaoCategoria", nullable = true)
+    @Column(name = "descricaocategoria", nullable = true)
     private String descricaoCategoria;
 
-    @Column(name = "tipoCategoria", nullable = true)
+    @Column(name = "tipocategoria", nullable = true)
     private String tipoCategoria;
 
     //* Conta */

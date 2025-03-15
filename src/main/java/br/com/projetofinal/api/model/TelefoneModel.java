@@ -9,18 +9,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
-@Entity
+@Entity(name = "Telefone")
 @Table(name = "Telefone")
 public class TelefoneModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idTelefone")
+    @Column(name = "idtelefone")
     private int idTelefone;
 
-    @Column(name = "numeroTelefone", nullable = true)
+    @Column(name = "numerotelefone", nullable = true)
     private String numeroTelefone;
 
-    @Column(name = "descricaoTelefone", nullable = true)
+    @Column(name = "descricaotelefone", nullable = true)
     private String descricaoTelefone;
 
     //* Usuário */

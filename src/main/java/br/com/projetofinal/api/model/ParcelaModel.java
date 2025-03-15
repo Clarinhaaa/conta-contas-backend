@@ -11,24 +11,24 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Entity
+@Entity(name = "Parcela")
 @Table(name = "Parcela")
 public class ParcelaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idParcela")
+    @Column(name = "idparcela")
     private int idParcela;
 
-    @Column(name = "dataVencimentoParcela", nullable = true)
+    @Column(name = "datavencimentoparcela", nullable = true)
     private Date dataVencimentoParcela;
 
-    @Column(name = "numeroParcela", nullable = true)
+    @Column(name = "numeroparcela", nullable = true)
     private int numeroParcela;
 
-    @Column(name = "valorParcela", nullable = true)
+    @Column(name = "valorparcela", nullable = true)
     private float valorParcela;
 
-    @Column(name = "statusParcela", nullable = true)
+    @Column(name = "statusparcela", nullable = true)
     private String statusParcela;
 
     //* Conta */
