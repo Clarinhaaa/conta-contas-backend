@@ -19,43 +19,42 @@ import jakarta.persistence.Table;
 public class ContaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idconta")
+    @Column(name = "id_conta")
     private int idConta;
 
-    @Column(name = "descricaoconta", nullable = true)
+    @Column(name = "descricao_conta", nullable = true)
     private String descricaoConta;
 
-    @Column(name = "valorconta", nullable = true)
+    @Column(name = "valor_conta", nullable = true)
     private float valorConta;
 
-    @Column(name = "datavencimentoconta", nullable = true)
+    @Column(name = "data_vencimento_conta", nullable = true)
     private Date dataVencimentoConta;
 
-    @Column(name = "datapagamentoconta", nullable = true)
+    @Column(name = "data_pagamento_conta", nullable = true)
     private Date dataPagamentoConta;
 
-    @Column(name = "tipoconta", nullable = true)
+    @Column(name = "tipo_conta", nullable = true)
     private String tipoConta;
 
-    @Column(name = "statusconta", nullable = true)
+    @Column(name = "status_conta", nullable = true)
     private boolean statusConta;
 
     // * Usuario */
     @ManyToOne
-    @JoinColumn(name = "Usuario_idUsuario", nullable = false)
+    @JoinColumn(name = "usuario_idusuario", nullable = false)
     private UsuarioModel usuarioConta;
 
     // * Categoria */
     @ManyToOne
-    @JoinColumn(name = "Categoria_idCategoria", nullable = false)
+    @JoinColumn(name = "categoria_idcategoria", nullable = false)
     private CategoriaModel categoriaConta;
 
     // * Parcela */
     @OneToMany(mappedBy = "contaParcela", cascade = CascadeType.ALL)
     private List<ParcelaModel> parcelas;
 
-    public ContaModel() {
-    }
+    public ContaModel() {}
 
     public ContaModel(int idConta, String descricaoConta, float valorConta, Date dataVencimentoConta,
             Date dataPagamentoConta, String tipoConta, boolean statusConta, UsuarioModel usuarioConta,
@@ -148,7 +147,6 @@ public class ContaModel {
         return "ContaModel [idConta=" + idConta + ", descricaoConta=" + descricaoConta + ", valorConta=" + valorConta
                 + ", dataVencimentoConta=" + dataVencimentoConta + ", dataPagamentoConta=" + dataPagamentoConta
                 + ", tipoConta=" + tipoConta + ", statusConta=" + statusConta + ", usuarioConta="
-                + usuarioConta.getNomeUsuario() + ", categoriaConta=" + categoriaConta.getDescricaoCategoria()
-                + "]";
+                + usuarioConta + ", categoriaConta=" + categoriaConta + "]";
     }
 }

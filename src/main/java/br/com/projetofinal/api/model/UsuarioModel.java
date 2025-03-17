@@ -19,32 +19,32 @@ import jakarta.persistence.Table;
 public class UsuarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idusuario")
+    @Column(name = "id_usuario")
     private int idUsuario;
 
-    @Column(name = "nomeusuario", nullable = true)
+    @Column(name = "nome_usuario", nullable = true)
     private String nomeUsuario;
 
-    @Column(name = "cpfusuario", nullable = true)
+    @Column(name = "cpf_usuario", nullable = true)
     private String cpfUsuario;
 
-    @Column(name = "emailusuario", nullable = true)
+    @Column(name = "email_usuario", nullable = true)
     private String emailUsuario;
 
-    @Column(name = "loginusuario", nullable = true)
+    @Column(name = "login_usuario", nullable = true)
     private String loginUsuario;
 
-    @Column(name = "senhausuario", nullable = true)
+    @Column(name = "senha_usuario", nullable = true)
     private String senhaUsuario;
 
     //* Endereço */
     @ManyToOne
-    @JoinColumn(name = "Endereco_idEndereco", nullable = false)
+    @JoinColumn(name = "endereco_idendereco", nullable = false)
     private EnderecoModel enderecoUsuario;
 
     //* Telefone */
     @OneToOne
-    @JoinColumn(name = "Telefone_idTelefone", nullable = false)
+    @JoinColumn(name = "telefone_idtelefone", nullable = false)
     private TelefoneModel telefoneUsuario;
 
     //* Conta */
@@ -133,6 +133,6 @@ public class UsuarioModel {
     public String toString() {
         return "UsuarioModel [idUsuario=" + idUsuario + ", nomeUsuario=" + nomeUsuario + ", cpfUsuario=" + cpfUsuario
                 + ", emailUsuario=" + emailUsuario + ", loginUsuario=" + loginUsuario + ", senhaUsuario=" + senhaUsuario
-                + ", enderecoUsuario=" + enderecoUsuario.getCep() + ", telefoneUsuario=" + telefoneUsuario.getNumeroTelefone() + "]";
+                + ", enderecoUsuario=" + enderecoUsuario + ", telefoneUsuario=" + telefoneUsuario + "]";
     }
 }

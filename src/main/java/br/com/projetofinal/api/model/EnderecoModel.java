@@ -16,10 +16,10 @@ import jakarta.persistence.Table;
 public class EnderecoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idendereco")
+    @Column(name = "id_endereco")
     private int idEndereco;
 
-    @Column(name = "numerocasa", nullable = true)
+    @Column(name = "numero_casa", nullable = true)
     private int numeroCasa;
 
     @Column(name = "rua", nullable = true)

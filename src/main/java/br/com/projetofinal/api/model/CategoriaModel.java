@@ -16,13 +16,13 @@ import jakarta.persistence.Table;
 public class CategoriaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idcategoria")
+    @Column(name = "id_categoria")
     private int idCategoria;
 
-    @Column(name = "descricaocategoria", nullable = true)
+    @Column(name = "descricao_categoria", nullable = true)
     private String descricaoCategoria;
 
-    @Column(name = "tipocategoria", nullable = true)
+    @Column(name = "tipo_categoria", nullable = true)
     private String tipoCategoria;
 
     //* Conta */

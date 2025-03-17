@@ -14,13 +14,13 @@ import jakarta.persistence.Table;
 public class TelefoneModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idtelefone")
+    @Column(name = "id_telefone")
     private int idTelefone;
 
-    @Column(name = "numerotelefone", nullable = true)
+    @Column(name = "numero_telefone", nullable = true)
     private String numeroTelefone;
 
-    @Column(name = "descricaotelefone", nullable = true)
+    @Column(name = "descricao_telefone", nullable = true)
     private String descricaoTelefone;
 
     //* Usuário */

@@ -16,24 +16,24 @@ import jakarta.persistence.Table;
 public class ParcelaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idparcela")
+    @Column(name = "id_parcela")
     private int idParcela;
 
-    @Column(name = "datavencimentoparcela", nullable = true)
+    @Column(name = "data_vencimento_parcela", nullable = true)
     private Date dataVencimentoParcela;
 
-    @Column(name = "numeroparcela", nullable = true)
+    @Column(name = "numero_parcela", nullable = true)
     private int numeroParcela;
 
-    @Column(name = "valorparcela", nullable = true)
+    @Column(name = "valor_parcela", nullable = true)
     private float valorParcela;
 
-    @Column(name = "statusparcela", nullable = true)
+    @Column(name = "status_parcela", nullable = true)
     private String statusParcela;
 
     //* Conta */
     @ManyToOne
-    @JoinColumn(name = "Conta_idConta", nullable = false)
+    @JoinColumn(name = "conta_idconta", nullable = false)
     private ContaModel contaParcela;
 
     public ParcelaModel() {}
@@ -100,6 +100,6 @@ public class ParcelaModel {
     public String toString() {
         return "ParcelaModel [idParcela=" + idParcela + ", dataVencimentoParcela=" + dataVencimentoParcela
                 + ", numeroParcela=" + numeroParcela + ", valorParcela=" + valorParcela + ", statusParcela="
-                + statusParcela + ", contaParcela=" + contaParcela.getDescricaoConta() + "]";
+                + statusParcela + ", contaParcela=" + contaParcela + "]";
     }
 }
