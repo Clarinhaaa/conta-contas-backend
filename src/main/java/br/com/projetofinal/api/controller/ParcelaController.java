@@ -18,7 +18,6 @@ import br.com.projetofinal.api.dao.ContaDao;
 import br.com.projetofinal.api.dao.ParcelaDao;
 import br.com.projetofinal.api.dto.ParcelaDto;
 import br.com.projetofinal.api.model.ParcelaModel;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController

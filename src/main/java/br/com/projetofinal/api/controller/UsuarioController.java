@@ -55,7 +55,6 @@ public class UsuarioController {
         savedUsu.setNomeUsuario(usu.getNomeUsuario());
         savedUsu.setCpfUsuario(usu.getCpfUsuario());
         savedUsu.setEmailUsuario(usu.getEmailUsuario());
-        savedUsu.setLoginUsuario(usu.getLoginUsuario());
         savedUsu.setSenhaUsuario(usu.getSenhaUsuario());
         savedUsu.setEnderecoUsuario(endDao.getById(usu.getIdEndereco()));
         savedUsu.setTelefoneUsuario(telDao.getById(usu.getIdTelefone()));
@@ -72,7 +71,6 @@ public class UsuarioController {
         updatedUsu.setNomeUsuario(usu.getNomeUsuario());
         updatedUsu.setCpfUsuario(usu.getCpfUsuario());
         updatedUsu.setEmailUsuario(usu.getEmailUsuario());
-        updatedUsu.setLoginUsuario(usu.getLoginUsuario());
         updatedUsu.setSenhaUsuario(usu.getSenhaUsuario());
         updatedUsu.setEnderecoUsuario(endDao.getById(usu.getIdEndereco()));
         updatedUsu.setTelefoneUsuario(telDao.getById(usu.getIdTelefone()));

@@ -11,7 +11,6 @@ public class UsuarioDto implements Serializable {
     private String nomeUsuario;
     private String cpfUsuario;
     private String emailUsuario;
-    private String loginUsuario;
     private String senhaUsuario;
     private int idEndereco;
     private int idTelefone;
@@ -22,7 +21,6 @@ public class UsuarioDto implements Serializable {
         usuDto.setNomeUsuario(usuModel.getNomeUsuario());
         usuDto.setCpfUsuario(usuModel.getCpfUsuario());
         usuDto.setEmailUsuario(usuModel.getEmailUsuario());
-        usuDto.setLoginUsuario(usuModel.getLoginUsuario());
         usuDto.setSenhaUsuario(usuModel.getSenhaUsuario());
         usuDto.setIdEndereco(usuModel.getEnderecoUsuario().getIdEndereco());
         usuDto.setIdTelefone(usuModel.getTelefoneUsuario().getIdTelefone());
@@ -38,15 +36,15 @@ public class UsuarioDto implements Serializable {
         return listDto;
     }
 
-    public UsuarioDto() {}
+    public UsuarioDto() {
+    }
 
-    public UsuarioDto(int idUsuario, String nomeUsuario, String cpfUsuario, String emailUsuario, String loginUsuario,
+    public UsuarioDto(int idUsuario, String nomeUsuario, String cpfUsuario, String emailUsuario,
             String senhaUsuario, int idEndereco, int idTelefone) {
         this.idUsuario = idUsuario;
         this.nomeUsuario = nomeUsuario;
         this.cpfUsuario = cpfUsuario;
         this.emailUsuario = emailUsuario;
-        this.loginUsuario = loginUsuario;
         this.senhaUsuario = senhaUsuario;
         this.idEndereco = idEndereco;
         this.idTelefone = idTelefone;
@@ -84,14 +82,6 @@ public class UsuarioDto implements Serializable {
         this.emailUsuario = emailUsuario;
     }
 
-    public String getLoginUsuario() {
-        return loginUsuario;
-    }
-
-    public void setLoginUsuario(String loginUsuario) {
-        this.loginUsuario = loginUsuario;
-    }
-
     public String getSenhaUsuario() {
         return senhaUsuario;
     }
@@ -119,7 +109,7 @@ public class UsuarioDto implements Serializable {
     @Override
     public String toString() {
         return "UsuarioDto [idUsuario=" + idUsuario + ", nomeUsuario=" + nomeUsuario + ", cpfUsuario=" + cpfUsuario
-                + ", emailUsuario=" + emailUsuario + ", loginUsuario=" + loginUsuario + ", senhaUsuario=" + senhaUsuario
+                + ", emailUsuario=" + emailUsuario + ", senhaUsuario=" + senhaUsuario
                 + ", idEndereco=" + idEndereco + ", idTelefone=" + idTelefone + "]";
     }
 }

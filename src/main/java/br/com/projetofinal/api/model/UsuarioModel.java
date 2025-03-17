@@ -31,9 +31,6 @@ public class UsuarioModel {
     @Column(name = "email_usuario", nullable = true)
     private String emailUsuario;
 
-    @Column(name = "login_usuario", nullable = true)
-    private String loginUsuario;
-
     @Column(name = "senha_usuario", nullable = true)
     private String senhaUsuario;
 
@@ -53,13 +50,12 @@ public class UsuarioModel {
 
     public UsuarioModel() {}
 
-    public UsuarioModel(int idUsuario, String nomeUsuario, String cpfUsuario, String emailUsuario, String loginUsuario,
+    public UsuarioModel(int idUsuario, String nomeUsuario, String cpfUsuario, String emailUsuario,
             String senhaUsuario, EnderecoModel enderecoUsuario, TelefoneModel telefoneUsuario) {
         this.idUsuario = idUsuario;
         this.nomeUsuario = nomeUsuario;
         this.cpfUsuario = cpfUsuario;
         this.emailUsuario = emailUsuario;
-        this.loginUsuario = loginUsuario;
         this.senhaUsuario = senhaUsuario;
         this.enderecoUsuario = enderecoUsuario;
         this.telefoneUsuario = telefoneUsuario;
@@ -97,14 +93,6 @@ public class UsuarioModel {
         this.emailUsuario = emailUsuario;
     }
 
-    public String getLoginUsuario() {
-        return loginUsuario;
-    }
-
-    public void setLoginUsuario(String loginUsuario) {
-        this.loginUsuario = loginUsuario;
-    }
-
     public String getSenhaUsuario() {
         return senhaUsuario;
     }
@@ -132,7 +120,7 @@ public class UsuarioModel {
     @Override
     public String toString() {
         return "UsuarioModel [idUsuario=" + idUsuario + ", nomeUsuario=" + nomeUsuario + ", cpfUsuario=" + cpfUsuario
-                + ", emailUsuario=" + emailUsuario + ", loginUsuario=" + loginUsuario + ", senhaUsuario=" + senhaUsuario
+                + ", emailUsuario=" + emailUsuario + ", senhaUsuario=" + senhaUsuario
                 + ", enderecoUsuario=" + enderecoUsuario + ", telefoneUsuario=" + telefoneUsuario + "]";
     }
 }
