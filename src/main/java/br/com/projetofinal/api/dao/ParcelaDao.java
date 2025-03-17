@@ -26,7 +26,7 @@ public class ParcelaDao implements InterfaceDao<ParcelaModel> {
 
     public List<ParcelaModel> getByConta(int idConta) {
         TypedQuery<ParcelaModel> query = em.createQuery(
-                "SELECT p FROM Parcela p JOIN p.contaParela WHERE p.contaParcela.idConta = :id", ParcelaModel.class);
+                "SELECT p FROM Parcela p JOIN p.contaParcela WHERE p.contaParcela.idConta = :id", ParcelaModel.class);
         query.setParameter("id", idConta);
         return query.getResultList();
     }

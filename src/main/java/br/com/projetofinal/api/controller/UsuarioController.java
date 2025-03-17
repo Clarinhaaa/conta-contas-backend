@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.projetofinal.api.dao.EnderecoDao;
+import br.com.projetofinal.api.dao.TelefoneDao;
 import br.com.projetofinal.api.dao.UsuarioDao;
+import br.com.projetofinal.api.dto.UsuarioDto;
 import br.com.projetofinal.api.model.UsuarioModel;
 
 @RestController
@@ -22,34 +25,61 @@ import br.com.projetofinal.api.model.UsuarioModel;
 public class UsuarioController {
     @Autowired
     private UsuarioDao usuDao;
+    @Autowired
+    private EnderecoDao endDao;
+    @Autowired
+    private TelefoneDao telDao;
 
     @GetMapping("/getAll")
-    public List<UsuarioModel> getAll() {
+    public List<UsuarioDto> getAll() {
         List<UsuarioModel> listUsu = usuDao.getAll();
-        return listUsu;
+        List<UsuarioDto> listDto = UsuarioDto.converterLista(listUsu);
+        return listDto;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioModel> getById(@PathVariable int id) {
+    public ResponseEntity<UsuarioDto> getById(@PathVariable int id) {
         UsuarioModel usu = usuDao.getById(id);
         if (usu != null) {
-            return new ResponseEntity<UsuarioModel>(usu, HttpStatus.OK);
+            UsuarioDto usuDto = UsuarioDto.converter(usu);
+            return new ResponseEntity<UsuarioDto>(usuDto, HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping("/save")
-    public ResponseEntity<UsuarioModel> save(@RequestBody UsuarioModel usu) {
-        usuDao.insert(usu);
-        return new ResponseEntity<UsuarioModel>(usu, HttpStatus.CREATED);
+    public ResponseEntity<UsuarioDto> save(@RequestBody UsuarioDto usu) {
+        UsuarioModel savedUsu = new UsuarioModel();
+        savedUsu.setIdUsuario(usu.getIdUsuario());
+        savedUsu.setNomeUsuario(usu.getNomeUsuario());
+        savedUsu.setCpfUsuario(usu.getCpfUsuario());
+        savedUsu.setEmailUsuario(usu.getEmailUsuario());
+        savedUsu.setLoginUsuario(usu.getLoginUsuario());
+        savedUsu.setSenhaUsuario(usu.getSenhaUsuario());
+        savedUsu.setEnderecoUsuario(endDao.getById(usu.getIdEndereco()));
+        savedUsu.setTelefoneUsuario(telDao.getById(usu.getIdTelefone()));
+        
+        usuDao.insert(savedUsu);
+        UsuarioDto usuDto = UsuarioDto.converter(savedUsu);
+        return new ResponseEntity<UsuarioDto>(usuDto, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioModel> update(@PathVariable int id, @RequestBody UsuarioModel usu) {
-        usu.setIdUsuario(id);
-        usuDao.update(usu);
-        return new ResponseEntity<UsuarioModel>(usu, HttpStatus.OK);
+    public ResponseEntity<UsuarioDto> update(@PathVariable int id, @RequestBody UsuarioDto usu) {
+        UsuarioModel updatedUsu = new UsuarioModel();
+        updatedUsu.setIdUsuario(usu.getIdUsuario());
+        updatedUsu.setNomeUsuario(usu.getNomeUsuario());
+        updatedUsu.setCpfUsuario(usu.getCpfUsuario());
+        updatedUsu.setEmailUsuario(usu.getEmailUsuario());
+        updatedUsu.setLoginUsuario(usu.getLoginUsuario());
+        updatedUsu.setSenhaUsuario(usu.getSenhaUsuario());
+        updatedUsu.setEnderecoUsuario(endDao.getById(usu.getIdEndereco()));
+        updatedUsu.setTelefoneUsuario(telDao.getById(usu.getIdTelefone()));
+
+        usuDao.update(updatedUsu);
+        UsuarioDto usuDto = UsuarioDto.converter(updatedUsu);
+        return new ResponseEntity<UsuarioDto>(usuDto, HttpStatus.OK);
     }
     
     @DeleteMapping("/{id}")

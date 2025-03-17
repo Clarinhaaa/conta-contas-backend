@@ -43,7 +43,7 @@ public class ContaDao implements InterfaceDao<ContaModel> {
 
     @Transactional
     public void delete(ContaModel con) {
-        if(em.contains(con)) {
+        if (em.contains(con)) {
             em.remove(con);
         } else {
             ContaModel generatedCon = em.merge(con);

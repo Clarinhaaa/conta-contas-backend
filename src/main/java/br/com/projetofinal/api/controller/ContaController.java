@@ -14,42 +14,82 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.projetofinal.api.dao.CategoriaDao;
 import br.com.projetofinal.api.dao.ContaDao;
+import br.com.projetofinal.api.dao.UsuarioDao;
+import br.com.projetofinal.api.dto.ContaDto;
 import br.com.projetofinal.api.model.ContaModel;
+
 
 @RestController
 @RequestMapping("/conta")
 public class ContaController {
     @Autowired
     private ContaDao conDao;
+    @Autowired
+    private UsuarioDao usuDao;
+    @Autowired
+    private CategoriaDao catDao;
 
     @GetMapping("/getAll")
-    public List<ContaModel> getAll() {
+    public List<ContaDto> getAll() {
         List<ContaModel> listCon = conDao.getAll();
-        return listCon;
+        List<ContaDto> listDto = ContaDto.converterLista(listCon);
+        return listDto;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ContaModel> getById(@PathVariable int id) {
+    public ResponseEntity<ContaDto> getById(@PathVariable int id) {
         ContaModel con = conDao.getById(id);
         if (con != null) {
-            return new ResponseEntity<ContaModel>(con, HttpStatus.OK);
+            ContaDto conDto = ContaDto.converter(con);
+            return new ResponseEntity<ContaDto>(conDto, HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/getByUsuario/{idUsu}")
+    public List<ContaDto> getByUsuario(@PathVariable int idUsu) {
+        List<ContaModel> listCon = conDao.getByUsuario(idUsu);
+        List<ContaDto> listDto = ContaDto.converterLista(listCon);
+        return listDto;
+    }
     
     @PostMapping("/save")
-    public ResponseEntity<ContaModel> save(@RequestBody ContaModel con) {
-        conDao.insert(con);
-        return new ResponseEntity<ContaModel>(con, HttpStatus.CREATED);
+    public ResponseEntity<ContaDto> save(@RequestBody ContaDto con) {
+        ContaModel savedCon = new ContaModel();
+        savedCon.setIdConta(con.getIdConta());
+        savedCon.setDescricaoConta(con.getDescricaoConta());
+        savedCon.setValorConta(con.getValorConta());
+        savedCon.setDataVencimentoConta(con.getDataVencimentoConta());
+        savedCon.setDataPagamentoConta(con.getDataPagamentoConta());
+        savedCon.setTipoConta(con.getTipoConta());
+        savedCon.setStatusConta(con.isStatusConta());
+        savedCon.setUsuarioConta(usuDao.getById(con.getIdUsuario()));
+        savedCon.setCategoriaConta(catDao.getById(con.getIdCategoria()));
+        
+        conDao.insert(savedCon);
+        ContaDto conDto = ContaDto.converter(savedCon);
+        return new ResponseEntity<ContaDto>(conDto, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ContaModel> update(@PathVariable int id, @RequestBody ContaModel con) {
-        con.setIdConta(id);
-        conDao.update(con);
-        return new ResponseEntity<ContaModel>(con, HttpStatus.OK);
+    public ResponseEntity<ContaDto> update(@PathVariable int id, @RequestBody ContaDto con) {
+        ContaModel updatedCon = new ContaModel();
+        updatedCon.setIdConta(con.getIdConta());
+        updatedCon.setDescricaoConta(con.getDescricaoConta());
+        updatedCon.setValorConta(con.getValorConta());
+        updatedCon.setDataVencimentoConta(con.getDataVencimentoConta());
+        updatedCon.setDataPagamentoConta(con.getDataPagamentoConta());
+        updatedCon.setTipoConta(con.getTipoConta());
+        updatedCon.setStatusConta(con.isStatusConta());
+        updatedCon.setUsuarioConta(usuDao.getById(con.getIdUsuario()));
+        updatedCon.setCategoriaConta(catDao.getById(con.getIdCategoria()));
+
+        conDao.update(updatedCon);
+        ContaDto conDto = ContaDto.converter(updatedCon);
+        return new ResponseEntity<ContaDto>(conDto, HttpStatus.OK);
     }
     
     @DeleteMapping("/{id}")
