@@ -8,6 +8,7 @@ import br.com.projetofinal.api.dao.util.InterfaceDao;
 import br.com.projetofinal.api.model.ContaModel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
@@ -39,6 +40,17 @@ public class ContaDao implements InterfaceDao<ContaModel> {
     @Transactional
     public void update(ContaModel con) {
         em.merge(con);
+    }
+
+    @Transactional
+    public void pagar(int idCon) {
+        Query queryData = em.createQuery(
+                "UPDATE Conta c SET c.dataPagamentoConta = CURRENT_DATE WHERE c.idConta = :id");
+        queryData.setParameter("id", idCon);
+
+        Query queryStatus = em
+                .createQuery("UPDATE Conta c SET c.statusConta = true WHERE c.idConta = :id");
+        queryStatus.setParameter("id", idCon);
     }
 
     @Transactional

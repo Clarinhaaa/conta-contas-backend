@@ -20,7 +20,6 @@ import br.com.projetofinal.api.dao.UsuarioDao;
 import br.com.projetofinal.api.dto.ContaDto;
 import br.com.projetofinal.api.model.ContaModel;
 
-
 @RestController
 @RequestMapping("/conta")
 public class ContaController {
@@ -55,7 +54,19 @@ public class ContaController {
         List<ContaDto> listDto = ContaDto.converterLista(listCon);
         return listDto;
     }
-    
+
+    @GetMapping("/pagar/{id}")
+    public ResponseEntity<?> pagar(@PathVariable int id) {
+        ContaModel con = conDao.getById(id);
+        if (con == null) {
+            return new ResponseEntity<>("Conta não encontrada", HttpStatus.NOT_FOUND);
+        }
+        conDao.pagar(id);
+
+        ContaDto conDto = ContaDto.converter(con);
+        return new ResponseEntity<ContaDto>(conDto, HttpStatus.OK);
+    }
+
     @PostMapping("/save")
     public ResponseEntity<ContaDto> save(@RequestBody ContaDto con) {
         ContaModel savedCon = new ContaModel();
@@ -68,7 +79,7 @@ public class ContaController {
         savedCon.setStatusConta(con.isStatusConta());
         savedCon.setUsuarioConta(usuDao.getById(con.getIdUsuario()));
         savedCon.setCategoriaConta(catDao.getById(con.getIdCategoria()));
-        
+
         conDao.insert(savedCon);
         ContaDto conDto = ContaDto.converter(savedCon);
         return new ResponseEntity<ContaDto>(conDto, HttpStatus.CREATED);
@@ -91,7 +102,7 @@ public class ContaController {
         ContaDto conDto = ContaDto.converter(updatedCon);
         return new ResponseEntity<ContaDto>(conDto, HttpStatus.OK);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ContaModel> delete(@PathVariable int id) {
         ContaModel con = conDao.getById(id);
