@@ -1,0 +1,1 @@
+Este é o back-end do projeto final das disciplinas de Estrutura de Dados, Banco de Dados e Linguagem de Programação II do curso Técnico em Informática Integrado do IFBA, que se tratava de um site de gerenciamento de contas para pagar e já pagas do usuário.
